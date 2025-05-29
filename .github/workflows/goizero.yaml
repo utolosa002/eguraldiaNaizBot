@@ -30,4 +30,5 @@ jobs:
                 TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
                 TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
                 MASTODON_ACCESS_TOKEN:  ${{ secrets.MASTODON_ACCESS_TOKEN }}
+                NOIZ: "goiza"
               run: python bot.py
