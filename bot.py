@@ -28,8 +28,9 @@ def get_iragarpena(noiz):
             while p_element[i]=='' :
                  i=i+1
             iragarpena=title_element.text+"\n"+p_element[i].text
-            print(p_element[i].text)
-            print(title_element.text)
+            iragarpena=iragarpena[:480]
+            #print(p_element[i].text)
+            #print(title_element.text)
         else:
             #TO-DO
             iragarpena="Biharko iragarpena"
