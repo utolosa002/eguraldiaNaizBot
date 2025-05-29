@@ -10,6 +10,7 @@ from mastodon import Mastodon
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 MASTODON_ACCESS_TOKEN = os.getenv('MASTODON_ACCESS_TOKEN')
+NOIZ = os.getenv('NOIZ')
 MASTODON_URL = 'https://mastodon.eus'
 
 def get_iragarpena(noiz):
@@ -20,20 +21,29 @@ def get_iragarpena(noiz):
     job_elements = results.find_all("div", class_="area-main")
     iragarpena='';
     if len(job_elements) > 0:    
-        if noiz=="gaurkoa":
-            job_element = job_elements[0]
+        job_element = job_elements[0]
+        if noiz=="goiza":
             title_element = job_element.find("h2")
             p_element   = job_element.find_all("p")
             i=0
-            while p_element[i]=='' :
+            while p_element[i].text=='' :
                  i=i+1
             iragarpena=title_element.text+"\n"+p_element[i].text
-            iragarpena=iragarpena[:480]
             #print(p_element[i].text)
             #print(title_element.text)
         else:
-            #TO-DO
-            iragarpena="Biharko iragarpena"
+            title_element = job_element.find_all("h2")
+            if len(title_element) > 1:    
+                title_element = title_element[1]
+            p_element   = job_element.find_all("p")
+            i=0
+            while p_element[i].text=='' :
+                 i=i+1
+            while p_element[i].text=='' :
+                 i=i+1
+            iragarpena=title_element.text+"\n"+p_element[i].text
+            #print(p_element[i].text)
+            #print(title_element.text)
     else:
         iragarpena="Gaur ez dago iragarpenik"
         
@@ -53,7 +63,6 @@ async def send_mastodon(message):
     Masto_api.status_post(message)
 
 async def main():
-    NOIZ="gaurkoa"
     iragarpena = get_iragarpena(NOIZ)
     await send_mastodon(iragarpena)
     await send_telegram(iragarpena)
