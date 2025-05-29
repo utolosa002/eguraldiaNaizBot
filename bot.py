@@ -37,15 +37,12 @@ def get_iragarpena(noiz):
                 title_element = title_element[1]
             p_element   = job_element.find_all("p")
             i=0
-            while p_element[i].text=='' :
-                i=i+1
+            while p_element[i].text=='' or p_element[i].text== p_element[i+1].text:
+                if len(p_element) > i+1 :
+                    i=i+1   
             if len(p_element) > i+1 :
-                i=i+1     
-            while p_element[i].text=='' :
                 i=i+1
             iragarpena=title_element.text+"\n"+p_element[i].text
-            #print(p_element[i].text)
-            #print(title_element.text)
     else:
         iragarpena="Gaur ez dago iragarpenik"
         
