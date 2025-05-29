@@ -49,7 +49,7 @@ async def send_mastodon(message):
                 access_token=MASTODON_ACCESS_TOKEN,
                 api_base_url=MASTODON_URL
             )
-    
+    message=message[:500]
     Masto_api.status_post(message)
 
 async def main():
