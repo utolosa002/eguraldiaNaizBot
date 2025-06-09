@@ -51,15 +51,15 @@ def get_iragarpena(noiz):
 
 async def send_telegram(message):
     tgbot = Bot(token=TELEGRAM_BOT_TOKEN)
-    response = await tgbot.send_message(chat_id=TELEGRAM_CHAT_ID, text=message)
+    response = await tgbot.send_message(chat_id=TELEGRAM_CHAT_ID, text=message+ ' https://www.naiz.eus/eu/eguraldia/iker-ibarluzea')
 
 async def send_mastodon(message):
     Masto_api = Mastodon(
                 access_token=MASTODON_ACCESS_TOKEN,
                 api_base_url=MASTODON_URL
             )
-    message=message[:500]
-    Masto_api.status_post(message)
+    message=message[:445]
+    Masto_api.status_post(message+ ' https://www.naiz.eus/eu/eguraldia/iker-ibarluzea')
 
 async def main():
     iragarpena = get_iragarpena(NOIZ)
